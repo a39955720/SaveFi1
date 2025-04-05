@@ -1,0 +1,6 @@
+[submodule "contract/lib/openzeppelin-contracts"]
+	path = contract/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "contract/lib/forge-multibaas"]
+	path = contract/lib/forge-multibaas
+	url = https://github.com/curvegrid/forge-multibaas
