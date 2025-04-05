@@ -1,0 +1,292 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_usdcAddress", "type": "address" },
+      { "internalType": "address", "name": "_aUsdcAddress", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_saveTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_aavePoolAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_swapRouter02Address",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "SaveFi__AlreadyStarted", "type": "error" },
+  { "inputs": [], "name": "SaveFi__AlreadyWithdrawn", "type": "error" },
+  {
+    "inputs": [],
+    "name": "SaveFi__DepositAmountShouldBeGreaterThanZero",
+    "type": "error"
+  },
+  { "inputs": [], "name": "SaveFi__InsufficientAllowance", "type": "error" },
+  { "inputs": [], "name": "SaveFi__NotStarted", "type": "error" },
+  { "inputs": [], "name": "SaveFi__TooEarlyToDeposit", "type": "error" },
+  { "inputs": [], "name": "SaveFi__TooEarlyToWithdraw", "type": "error" },
+  {
+    "inputs": [],
+    "name": "SaveFi__TotalDepositDaysShouldBeGreaterThanZero",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "depositContract",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountPerDeposit",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "depositEndTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "nextDepositDeadline",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositPlanStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "nextDepositDeadline",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "onTime",
+        "type": "bool"
+      }
+    ],
+    "name": "Deposited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "early",
+        "type": "bool"
+      }
+    ],
+    "name": "Withdrawn",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "minAmountOut", "type": "uint256" }
+    ],
+    "name": "deposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "minAmountOut", "type": "uint256" }
+    ],
+    "name": "earlyWithdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getDepositPlan",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "bool", "name": "isWithdrawn", "type": "bool" },
+          { "internalType": "bool", "name": "isStarted", "type": "bool" },
+          {
+            "internalType": "contract DepositContract",
+            "name": "depositContract",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountPerDeposit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "depositEndTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nextDepositDeadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SaveFi.DepositPlan",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getUserTotalDepositedAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getUserTotalSaveTokenAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountPerDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalDepositDays",
+        "type": "uint256"
+      }
+    ],
+    "name": "startDeposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "minAmountOut", "type": "uint256" }
+    ],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
