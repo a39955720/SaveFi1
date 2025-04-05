@@ -6,4 +6,5 @@ contract/out
 contract/coverage.txt
 frontend/node_modules
 frontend/.next/
+frontend/.env.local
 a.txt
