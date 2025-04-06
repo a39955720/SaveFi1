@@ -34,3 +34,9 @@ SaveFi:
 
 SaveToken:
 	@forge script script/DeploySaveToken.s.sol:DeploySaveToken --rpc-url $(SEPOLIA_RPC_URL) --account TEST1 --verify --etherscan-api-key $(ETHERSCAN_API_KEY) --legacy --broadcast -vvvvv
+
+Celo:
+	@forge script script/DeploySaveFi.s.sol:DeploySaveFi --rpc-url $(CELO_MAINNET_RPC_URL) --account TEST1 --verify --etherscan-api-key $(CELOSCAN_API_KEY) --legacy --broadcast --ffi -vvvvv
+
+Polygon:
+	@forge script script/DeploySaveFi.s.sol:DeploySaveFi --rpc-url $(POLYGON_MAINNET_RPC_URL) --account TEST1 --verify --etherscan-api-key $(POLYOGNSCAN_API_KEY) --legacy --broadcast --ffi -vvvvv
